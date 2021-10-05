@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>购买</title>
+</head>
+
+<body>
+    {% if result['rarity'] != 'white' %}
+    <h1 style="text-align: center;"><h1 style="color: {{result['rarity']}};">{{result['name']}}</h1>价格为{{result['price']}}，购买失败</h1>
+    {% else  %}
+    <h1 style="text-align: center;">{{result['name']}}<br/>价格为{{result['price']}}，购买失败</h1>
+    {% endif %}
+    <form action="http://localhost:5000/login" method="POST">
+    </p><input type="submit"  value = "返回主页"></p>
+    <input type="hidden" name="nm" value={{pl.name}} />
+    </form>
+</body>
+</html>

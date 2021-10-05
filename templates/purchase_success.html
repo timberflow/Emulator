@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>购买</title>
+</head>
+
+<body>
+    {% if result['rarity'] != 'white' %}
+    <h1 style="text-align: center;">以价格{{result['price']}}成功购买：<h1 style="color: {{result['rarity']}};">{{result['name']}}</h1></h1>
+    {% else  %}
+    <h1 style="text-align: center;">以价格{{result['price']}}成功购买：<br/>{{result['name']}}</h1>
+    {% endif %}
+</p style = "text-align:center"><input type="button" onclick="self.location=document.referrer;" value = "返回"></p>
+</body>
+</html>
