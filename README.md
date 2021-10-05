@@ -6,7 +6,15 @@
 
 ## app基本说明
 ### 准备工作
-首先要有一个安装了pymongo的终端，从shell进入app.py同级目录，运行:
+首先要有一个安装了pymongo和flask以及带有的一些模块的终端，flask官网：
+https://flask.palletsprojects.com/en/2.0.x/
+pymongo官网：
+https://pypi.org/project/pymongo/
+两者都可以借用pip安装，如果Flask安装超时的话可以试试豆瓣的：
+```python
+pip install flask -i http://pypi.douban.com/simple
+```
+从shell进入app.py同级目录，运行:
 ```python
 flask run
 ```
