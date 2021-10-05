@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>装备</title>
+</head>
+<body>
+    <form action="http://localhost:5000/login" method="POST">
+    </p><input type="submit"  value = "返回主页"></p>
+    <input type="hidden" name="nm" value={{pl['name']}} />
+    </form>
+    <h1 style="text-align: center;">恭喜你获得了{{result}}的加班费!</h1>
+    <h2 style="text-align: center;">更好的装备能决定获得数额的下限，更好的饰品能决定获取数额的上限</h2>
+    <h2 style="text-align: center;">你现在的工作能力是{{pl['ability']}},幸运值是{{pl['luck']}}</h2>
+</body>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>装备</title>
+</head>
+
+<body>
+   <form action="http://localhost:5000/login" method="post">
+   </p><input type="submit"  value = "返回主页"></p>
+   <input type="hidden" name="nm" value={{result['name']}} />
+   </form>
+
+    <h1 style="text-align: center;">你的装备：</h1>
+    {% if result['wearing_equipment'] != None %}
+  
+    <table border = 1>
+        {% for k, v in result['wearing_equipment'].items() %}
+           {% if (k == 'name' or k == 'rarity') and result['wearing_equipment']['rarity'] != 'white' %}
+           <tr>
+              <th> {{ k }} </th>
+              <td style="color: {{result['wearing_equipment']['rarity']}};"> {{ v }} </td>
+            </tr>
+            {% else %}
+            <tr>
+               <th> {{ k }} </th>
+               <td> {{ v }} </td>
+            </tr>
+         {% endif %}
+
+              
+           
+           
+        {% endfor %}
+     </table>
+     {% else %}
+     <h1 style="text-align: center;">你啥也没穿，快去装备</h1>
+     {% endif %}
+
+     <h1 style="text-align: center;">你的物品：</h1>
+     
+     {% if result['item_list'] != [] %}
+     <table border = 1>
+        <tr>
+            <th> 名字 </th>
+            <th> 能力 </th>
+            <th> 稀有度 </th>
+            
+         </tr>
+        {% for i in result['item_list'] %}
+
+           {% if i['type'] == 'equipment' %}
+           
+           <tr>
+              {% if i['rarity'] != 'white' %}
+              
+              <th style="color: {{i['rarity']}};"> {{i['name']}} </th>
+              <th > {{i['ability']}} </th>
+              <th style="color: {{i['rarity']}};"> {{i['rarity']}} </th>
+
+                 {% if i == result['wearing_equipment'] %}
+              <th>已装备</th>
+
+                 {% else %}
+
+              <form action = "http://localhost:5000/wear" method = "post">
+              <th> <p><input type="submit" value="装备"></p></th>
+              <p><input type="hidden" value={{ i['id'] }} name = 'iid'></p>
+              <p><input type="hidden" value={{ result['name'] }} name = 'nm'></p>
+              </form>
+                 {% endif %}
+              {% else %}
+              
+              <th> {{i['name']}} </th>
+              <th> {{i['ability']}} </th>
+              <th> {{i['rarity']}} </th>
+
+                 {% if i == result['wearing_equipment'] %}
+              <th>已装备</th>
+
+                 {% else %}
+
+              <form action = "http://localhost:5000/wear" method = "post">
+              <th> <p><input type="submit" value="装备"></p></th>
+              <p><input type="hidden" value={{ i['id'] }} name = 'iid'></p>
+              <p><input type="hidden" value={{ result['name'] }} name = 'nm'></p>
+              </form>
+                 {% endif %}
+              {% endif %}
+           </tr>
+           {% else %}{% endif %}
+         
+        {% endfor %}
+     </table>
+    
+     {% else %}
+     <h1 style="text-align: center;">你啥也没有，快去寻宝</h1>
+     {% endif %}
+
+
+     
+</body>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>寄售列表</title>
+</head>
+
+<body>
+   <form action="http://localhost:5000/login" method="POST">
+   </p><input type="submit"  value = "返回主页"></p>
+   <input type="hidden" name="nm" value={{pl.name}} />
+   </form>
+
+    <table border = 1>
+        
+        <h1 style="text-align: center;">你的背包里中有{{pl.item_list | length}}件物品</h1>
+        {% if pl.item_list == [] %}
+        {% else %}
+           <tr>
+            {% for k in pl.item_list[0].keys() %}
+              {% if k == '_id' %}{% else %}
+              <th> {{ k }} </th>
+              {% endif %}
+            {% endfor %}
+            </tr>
+        
+        
+        {% for i in pl.item_list %}
+           
+           <tr>
+            {% for k,v in i.items() %}
+               {% if ((k == 'name' or k == 'rarity') and k != '_id') and i['rarity'] != 'white' %}
+               <td style="color: {{i['rarity']}}"> {{ v }} </td>
+               {% elif k != '_id' %}
+               <td> {{ v }} </td>
+               {% else %}
+               {% endif %}
+            {% endfor %}
+            {% if i['status'] == 'on_block' %}
+               <td>寄售中</td>
+            {% elif i['status'] == 'wearing' %}
+               <td>装备中</td>
+            {% else %}
+
+            <form action = "http://localhost:5000/consign_item" method="post">
+            <p><input type="hidden"  value={{ i['id'] }} name = 'cid'/></p> 
+            <p><input type="hidden" value={{ pl.name }} name = 'nm'></p>   
+            <td><p>寄售价格<input type="text" name = 'price'/></p><p><input type="submit" value="寄售"></p></td>
+           </form>
+            {% endif %}
+           </tr>
+           
+           
+        {% endfor %}
+        {% endif %}
+     </table>
+</body>

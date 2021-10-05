@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>寻宝结果</title>
+</head>
+<body>
+</p><input type="button" onclick="self.location=document.referrer;" value = "返回"></p>
+    {% if result == None %}
+    <h1 style="text-align: center;">江畔何人初寻财</h1>
+    <h1 style="text-align: center;">江财何日初落尘</h1>
+    {% else %}
+    {% if result['rarity'] != 'white' %}
+    <h1 style="text-align: center;">恭喜你获得:<h1 style="text-align: center;color: {{result['rarity']}};">{{result['name']}}!</h1></h1>
+    {% else %}
+    <h1 style="text-align: center;">恭喜你获得:<br />{{result['name']}}!</h1>
+    {% endif %}
+    <table border = 1>
+        {% for key, value in result.items() %}
+           
+           <tr>
+              <th> {{ key }} </th>
+              {% if key == 'rarity' and value != 'white' %}
+              <td style="color: {{value}};"> {{ value }} </td>
+              {% else %}
+              <td> {{ value }} </td>
+              {% endif %}
+           </tr>
+           
+        {% endfor %}
+     </table>
+     {% endif %}
+</body>
+
+
+</html>
